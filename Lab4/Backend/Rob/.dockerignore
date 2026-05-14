@@ -1,0 +1,55 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Build results
+**/bin/
+**/obj/
+**/out/
+**/.vs/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# SQLite database files (will be created in container)
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
+# Uploads and backups (will be created in container)
+**/Uploads/
+**/Backups/
+
+# Test files
+**/*.http
+**/test*.ps1
+
+# Documentation
+**/*.md
+!README.md
+!CLAUDE.md
+
+# Docker files
+**/Dockerfile*
+**/docker-compose*
+**/.dockerignore
+
+# IDE and editor files
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+**/*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PowerShell temporary files
+**/*.pptx
+~$*

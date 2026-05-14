@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-body-md min-h-screen selection:bg-tertiary-fixed-dim selection:text-tertiary-container;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline-md;
+  }
+}
+
+@layer utilities {
+  .sketch-border {
+    border: 2px solid theme('colors.primary-container');
+    border-radius: 4px 8px 3px 6px / 6px 3px 7px 4px;
+  }
+  
+  .sketch-border-thin {
+    border: 1px solid theme('colors.primary-container');
+    border-radius: 3px 5px 2px 4px / 4px 2px 5px 3px;
+  }
+  
+  .sketch-bg {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(47,49,50,0.03) 10px, rgba(47,49,50,0.03) 11px);
+  }
+  
+  .sketch-shadow {
+    box-shadow: 3px 4px 0 0 theme('colors.primary-container');
+  }
+  
+  .sketch-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, theme('colors.primary-container') 10%, theme('colors.primary-container') 90%, transparent);
+  }
+}
+
+/* Custom transitions and hover effects from reference */
+.nav-link-active {
+  @apply bg-primary-container/5 sketch-border-thin rotate-1 scale-95;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}

@@ -1,0 +1,56 @@
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+.vs/
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Uploads and Backups directories
+Uploads/
+Backups/
+
+# Docker environment file (contains secrets!)
+.env
+
+# Keep .env.example for reference
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# PowerPoint temporary files
+~$*.pptx

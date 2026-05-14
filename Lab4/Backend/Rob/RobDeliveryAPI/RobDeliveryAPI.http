@@ -1,0 +1,350 @@
+@RobDeliveryAPI_HostAddress = http://localhost:5102
+@token = your_jwt_token_here
+
+### === USER ENDPOINTS === ###
+
+### Register new user (password-based)
+POST {{RobDeliveryAPI_HostAddress}}/api/User/register
+Content-Type: application/json
+
+{
+  "userName": "testuser",
+  "email": "test@example.com",
+  "password": "SecurePassword123!",
+  "phoneNumber": "+380123456789"
+}
+
+###
+
+### Register new user (Google OAuth)
+POST {{RobDeliveryAPI_HostAddress}}/api/User/register
+Content-Type: application/json
+
+{
+  "userName": "googleuser",
+  "email": "google@example.com",
+  "googleIdToken": "google_id_token_here"
+}
+
+###
+
+### Login user (password-based)
+POST {{RobDeliveryAPI_HostAddress}}/api/User/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "SecurePassword123!"
+}
+
+###
+
+### Login user (Google OAuth)
+POST {{RobDeliveryAPI_HostAddress}}/api/User/login
+Content-Type: application/json
+
+{
+  "email": "google@example.com",
+  "googleIdToken": "google_id_token_here"
+}
+
+###
+
+### === ORDER ENDPOINTS === ###
+
+### Create new order (requires auth)
+POST {{RobDeliveryAPI_HostAddress}}/api/Order
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Package Delivery",
+  "description": "Electronics package",
+  "weight": 2.5,
+  "price": 150.00,
+  "recipientId": 2,
+  "pickupNodeId": 1,
+  "dropoffNodeId": 3
+}
+
+###
+
+### Get order by ID
+GET {{RobDeliveryAPI_HostAddress}}/api/Order/1
+Authorization: Bearer {{token}}
+
+###
+
+### Get all orders
+GET {{RobDeliveryAPI_HostAddress}}/api/Order
+Authorization: Bearer {{token}}
+
+###
+
+### Get my orders
+GET {{RobDeliveryAPI_HostAddress}}/api/Order/my-orders
+Authorization: Bearer {{token}}
+
+###
+
+### Get user orders by userId
+GET {{RobDeliveryAPI_HostAddress}}/api/Order/user/1
+Authorization: Bearer {{token}}
+
+###
+
+### Get sent orders
+GET {{RobDeliveryAPI_HostAddress}}/api/Order/sent/1
+Authorization: Bearer {{token}}
+
+###
+
+### Get received orders
+GET {{RobDeliveryAPI_HostAddress}}/api/Order/received/2
+Authorization: Bearer {{token}}
+
+###
+
+### Get orders by status
+GET {{RobDeliveryAPI_HostAddress}}/api/Order/status/Pending
+Authorization: Bearer {{token}}
+
+###
+
+### Update order status
+PATCH {{RobDeliveryAPI_HostAddress}}/api/Order/1/status
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "newStatus": "Processing"
+}
+
+###
+
+### Assign robot to order
+POST {{RobDeliveryAPI_HostAddress}}/api/Order/1/assign-robot
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "robotId": 1
+}
+
+###
+
+### Cancel order
+POST {{RobDeliveryAPI_HostAddress}}/api/Order/1/cancel
+Authorization: Bearer {{token}}
+
+###
+
+### Delete order
+DELETE {{RobDeliveryAPI_HostAddress}}/api/Order/1
+Authorization: Bearer {{token}}
+
+###
+
+### === ROBOT ENDPOINTS === ###
+
+### Create new robot
+POST {{RobDeliveryAPI_HostAddress}}/api/Robot
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Robot-01",
+  "model": "DeliveryBot-X1",
+  "type": "Ground",
+  "currentNodeId": 1
+}
+
+###
+
+### Get robot by ID
+GET {{RobDeliveryAPI_HostAddress}}/api/Robot/1
+Authorization: Bearer {{token}}
+
+###
+
+### Get all robots
+GET {{RobDeliveryAPI_HostAddress}}/api/Robot
+Authorization: Bearer {{token}}
+
+###
+
+### Get robots by status
+GET {{RobDeliveryAPI_HostAddress}}/api/Robot/status/Idle
+Authorization: Bearer {{token}}
+
+###
+
+### Get robots by type
+GET {{RobDeliveryAPI_HostAddress}}/api/Robot/type/Ground
+Authorization: Bearer {{token}}
+
+###
+
+### Get available robots
+GET {{RobDeliveryAPI_HostAddress}}/api/Robot/available
+Authorization: Bearer {{token}}
+
+###
+
+### Update robot
+PUT {{RobDeliveryAPI_HostAddress}}/api/Robot/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 1,
+  "name": "Robot-01-Updated",
+  "model": "DeliveryBot-X1",
+  "type": "Ground",
+  "status": "Idle",
+  "batteryLevel": 85,
+  "currentNodeId": 2
+}
+
+###
+
+### Delete robot
+DELETE {{RobDeliveryAPI_HostAddress}}/api/Robot/1
+Authorization: Bearer {{token}}
+
+###
+
+### === NODE ENDPOINTS === ###
+
+### Create new node
+POST {{RobDeliveryAPI_HostAddress}}/api/Node
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Central Station",
+  "description": "Main delivery hub",
+  "latitude": 49.9935,
+  "longitude": 36.2304,
+  "type": "Hub"
+}
+
+###
+
+### Get node by ID
+GET {{RobDeliveryAPI_HostAddress}}/api/Node/1
+Authorization: Bearer {{token}}
+
+###
+
+### Get all nodes
+GET {{RobDeliveryAPI_HostAddress}}/api/Node
+Authorization: Bearer {{token}}
+
+###
+
+### Get nodes by type
+GET {{RobDeliveryAPI_HostAddress}}/api/Node/type/Hub
+Authorization: Bearer {{token}}
+
+###
+
+### Update node
+PUT {{RobDeliveryAPI_HostAddress}}/api/Node/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 1,
+  "name": "Central Station Updated",
+  "description": "Main delivery hub - updated",
+  "latitude": 49.9935,
+  "longitude": 36.2304,
+  "type": "Hub"
+}
+
+###
+
+### Delete node
+DELETE {{RobDeliveryAPI_HostAddress}}/api/Node/1
+Authorization: Bearer {{token}}
+
+###
+
+### === PARTNER ENDPOINTS === ###
+
+### Create new partner
+POST {{RobDeliveryAPI_HostAddress}}/api/Partner
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "FastDelivery LLC",
+  "contactInfo": "contact@fastdelivery.com",
+  "address": "123 Main Street, Kharkiv"
+}
+
+###
+
+### Get partner by ID
+GET {{RobDeliveryAPI_HostAddress}}/api/Partner/1
+Authorization: Bearer {{token}}
+
+###
+
+### Get all partners
+GET {{RobDeliveryAPI_HostAddress}}/api/Partner
+Authorization: Bearer {{token}}
+
+###
+
+### Update partner
+PUT {{RobDeliveryAPI_HostAddress}}/api/Partner/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 1,
+  "name": "FastDelivery LLC Updated",
+  "contactInfo": "newcontact@fastdelivery.com",
+  "address": "456 New Street, Kharkiv"
+}
+
+###
+
+### Delete partner
+DELETE {{RobDeliveryAPI_HostAddress}}/api/Partner/1
+Authorization: Bearer {{token}}
+
+###
+
+### === ADMIN ENDPOINTS (Admin role required) === ###
+
+### Get system statistics
+GET {{RobDeliveryAPI_HostAddress}}/api/Admin/stats
+Authorization: Bearer {{token}}
+
+###
+
+### Export delivery history
+GET {{RobDeliveryAPI_HostAddress}}/api/Admin/export/delivery-history
+Authorization: Bearer {{token}}
+
+###
+
+### Create database backup
+POST {{RobDeliveryAPI_HostAddress}}/api/Admin/backup
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "backupPath": "Backups"
+}
+
+###
+
+### Get robot efficiency analytics
+GET {{RobDeliveryAPI_HostAddress}}/api/Admin/analytics/robot-efficiency
+Authorization: Bearer {{token}}
+
+###

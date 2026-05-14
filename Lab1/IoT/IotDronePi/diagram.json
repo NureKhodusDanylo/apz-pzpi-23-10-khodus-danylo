@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "author": "RobDelivery IoT Team",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": 285, "left": -93.2, "attrs": {} },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-lcd2004",
+      "id": "lcd1",
+      "top": -233.6,
+      "left": 120.8,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-tm1637-7segment",
+      "id": "sevseg1",
+      "top": 124.76,
+      "left": 160.63,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 217.4,
+      "left": 115.2,
+      "attrs": { "color": "green", "xray": "1" }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo1",
+      "top": 100,
+      "left": -200,
+      "attrs": { "horn": "straight" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_status",
+      "top": 200,
+      "left": -50,
+      "attrs": { "color": "blue", "label": "STATUS" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_warning",
+      "top": 200,
+      "left": -10,
+      "attrs": { "color": "red", "label": "WARNING" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_conn",
+      "top": 200,
+      "left": 30,
+      "attrs": { "color": "green", "label": "CONN" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "bb1:tp.1", "green", [ "v71.9", "h-160.5" ] ],
+    [ "esp:GND.1", "bb1:tn.1", "black", [ "h0" ] ],
+    [ "bb1:tn.25", "sevseg1:GND", "green", [ "h145.6", "v-124.9" ] ],
+    [ "bb1:tp.25", "sevseg1:VCC", "green", [ "h164.8", "v-124.5" ] ],
+    [ "sevseg1:CLK", "esp:D18", "green", [ "v-57.6", "h-220.8", "v-14.3" ] ],
+    [ "sevseg1:DIO", "esp:D19", "green", [ "v-76.8", "h-211.2", "v-14.2" ] ],
+    [ "lcd1:GND", "bb1:tn.2", "black", [ "h0" ] ],
+    [ "lcd1:VCC", "bb1:tp.3", "red", [ "h0" ] ],
+    [ "lcd1:SDA", "esp:D21", "green", [ "h19.2", "v211.4" ] ],
+    [ "lcd1:SCL", "esp:D22", "green", [ "h-9.6", "v207.1" ] ],
+    [ "btn1:2.l", "bb1:tn.16", "green", [ "h0" ] ],
+    [ "btn1:1.l", "esp:D12", "green", [ "v-19.2", "h-134.4", "v-80.8" ] ],
+    
+    [ "servo1:GND", "esp:GND.2", "black", [] ],
+    [ "servo1:VCC", "esp:5V", "red", [] ],
+    [ "servo1:PWM", "esp:D26", "orange", [] ],
+    
+    [ "led_status:A", "esp:D32", "blue", [] ],
+    [ "led_status:C", "esp:GND.2", "black", [] ],
+    
+    [ "led_warning:A", "esp:D33", "red", [] ],
+    [ "led_warning:C", "esp:GND.2", "black", [] ],
+    
+    [ "led_conn:A", "esp:D25", "green", [] ],
+    [ "led_conn:C", "esp:GND.2", "black", [] ]
+  ],
+  "dependencies": {}
+}

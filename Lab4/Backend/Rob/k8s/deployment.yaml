@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rob-delivery-api
+  namespace: rob-delivery
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rob-delivery-api
+  template:
+    metadata:
+      labels:
+        app: rob-delivery-api
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: api
+          image: your-docker-registry/rob-delivery-api:latest # Replace with your image
+          ports:
+            - containerPort: 7860
+          envFrom:
+            - configMapRef:
+                name: rob-delivery-config
+            - secretRef:
+                name: rob-delivery-secrets
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /swagger/index.html
+              port: 7860
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /swagger/index.html
+              port: 7860
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: rob-delivery-data

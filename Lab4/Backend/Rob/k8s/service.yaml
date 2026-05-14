@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rob-delivery-service
+  namespace: rob-delivery
+spec:
+  selector:
+    app: rob-delivery-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 7860
+  type: ClusterIP

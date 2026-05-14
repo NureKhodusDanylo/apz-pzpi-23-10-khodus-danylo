@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rob-delivery-config
+  namespace: rob-delivery
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  ASPNETCORE_URLS: "http://+:7860"
+  Jwt__Issuer: "RobDeliveryAPI"
+  Jwt__Audience: "RobDeliveryClient"
+  Jwt__TokenExpiresHours: "24"
+  DeliveryPricing__BasePrice: "50"
+  DeliveryPricing__PricePerKg: "10"
+  ConnectionStrings__DefaultConnection: "Data Source=/data/RobDelivery.db"
+  Authentication__Google__ClientId: "277199733405-bn8d717l6h3s39qgu5g9fe15lrf5v18n.apps.googleusercontent.com"
+  Authentication__Google__MobileClientId: "277199733405-6mbgbe61g38ktf6lsqrhckgv2jbdu9m5.apps.googleusercontent.com"
